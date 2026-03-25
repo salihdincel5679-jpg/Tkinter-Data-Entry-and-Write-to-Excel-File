@@ -1,6 +1,3 @@
-
-
-
 import tkinter as tk
 from tkinter import ttk
 from tkinter import messagebox
@@ -68,8 +65,11 @@ def enter_data():
                 workbook.save(filepath)
             workbook = openpyxl.load_workbook(filepath)
             sheet = workbook.active
-            sheet.append(list(data.values()))
-            workbook.save(filepath) 
+            if all(data.values()):
+                sheet.append(list(data.values()))
+                workbook.save(filepath) 
+            else: 
+                tk.messagebox.showwarning(title="Error !" , message = "You have to fill boxes")
 
             return data
         else:
